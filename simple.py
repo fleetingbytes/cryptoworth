@@ -5,7 +5,6 @@ import itertools
 import json
 import logging
 import logging.config
-import math
 import pathlib
 
 #Own modules:
@@ -44,15 +43,16 @@ def wait_key() -> str:
     return str(result, encoding="utf-8").upper()
 
 
-myWallet = classes.Wallet(name="Sven's wallet",
-                          dollar=5.21, 
-                          euro=0.29, 
-                          bitcoin=3.70511573+0.0599833+0.094, 
-                          ether=12.65+0.03, 
-                          litecoin=79.691+0.1)
+myWallet = classes.Wallet(name="Sven's wallet", 
+                          curr_amounts={"USD": 5.21,
+                                        "EUR": 0.29,
+                                        "BTC": 3.70511573+0.0599833+0.094,
+                                        "ETH": 12.65 + 0.03,
+                                        "LTC": 79.691 + 0.1}
+                         )
 
 
-symbols = ("BTC-EUR", )
+symbols = ("BTC-EUR", "ETH-EUR", "LTC-EUR")
 # symbols = ("BTC-EUR", "ETH-EUR", "LTC-EUR")
 subscriptions = [] + \
                 ['{"action": "subscribe", "channel": "l3", "symbol": "' + f"{symbol}" + '"}' for symbol in symbols]
