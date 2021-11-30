@@ -56,7 +56,8 @@ def create_dict_config(directory: pathlib.Path, all_log: str, error_log: str) ->
 
     root_console_handler_conf = {
         "class": "logging.StreamHandler",
-        "level": "DEBUG",
+        "level": "INFO",
+        # "level": "DEBUG",
         "formatter": "console_formatter",
         "stream": "ext://sys.stdout",
     }

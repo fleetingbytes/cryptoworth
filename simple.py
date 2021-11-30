@@ -44,11 +44,12 @@ def wait_key() -> str:
 
 
 myWallet = classes.Wallet(name="Sven's wallet", 
-                          curr_amounts={"USD": 5.21,
-                                        "EUR": 0.29,
-                                        "BTC": 3.70511573+0.0599833+0.094,
-                                        "ETH": 12.65 + 0.03,
-                                        "LTC": 79.691 + 0.1}
+                          curr_amounts={"USD": 13.26,
+                                        "EUR": 3000.29,
+                                        "BTC": 4.06862207+0.0549664+0.094,
+                                        "ETH": 17.65 + 0.03,
+                                        "LTC": 104.11796365 + 0.1},
+                          investments={"EUR": 7000 + 22000 + 2500 + 3000 + 2000 + 1000 + 4000},
                          )
 
 

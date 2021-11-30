@@ -58,6 +58,7 @@ class Currency:
 class Wallet:
     name: str
     curr_amounts: dataclasses.InitVar[Mapping[str, float]]
+    investments: Mapping[str, float] = dataclasses.field(default_factory=dict)
     currencies: Mapping[str, Currency] = dataclasses.field(init=False)
     amounts: Mapping[str, float] = dataclasses.field(init=False)
     values: Mapping[str, float] = dataclasses.field(init=False)
@@ -81,6 +82,9 @@ class Wallet:
                 self.values[symbol] = 0
             except KeyError:
                 logger.error(f"Currency {symbol} not implemented.")
+        for symbol in symbols:
+            if symbol not in self.investments:
+                self.investments[symbol] = 0
 
 
 @dataclasses.dataclass
@@ -174,7 +178,9 @@ class Exchange:
         sold_value_BTC = self.change_currency(wallet, "BTC", "EUR")
         sold_value_ETH = self.change_currency(wallet, "ETH", "EUR")
         sold_value_LTC = self.change_currency(wallet, "LTC", "EUR")
-        logger.info(f"Total value: {sold_value_BTC + sold_value_ETH + sold_value_LTC}")
+        total_value = sold_value_BTC + sold_value_ETH + sold_value_LTC
+        gain = total_value / wallet.investments["EUR"] - 1
+        logger.info("Invested: €{:.2f}, current value: €{:.2f}, {:.2%} gain.".format(wallet.investments["EUR"], total_value, gain))
     def process_update(self, message):
         symbol = message["symbol"]
         bids = message["bids"]
